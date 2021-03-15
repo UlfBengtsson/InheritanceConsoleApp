@@ -1,33 +1,56 @@
 ﻿using System;
+using System.Collections.Generic;
 using InheritanceConsoleApp.Models;
 
 namespace InheritanceConsoleApp
 {
     class Program
     {
-        
+
 
         static void Main(string[] args)
         {
-            Person person = new Person("ulf","0123456", 39);
-
-            Console.WriteLine(person);
+            School();
         }
 
-        public void School()
+        public static void School()
         {
-            Teacher uffe = new Teacher();
+            Teacher uffe = new Teacher("Ulf", "0123456", 39);
 
-            uffe.Name = "Ulf";
-            uffe.Phone = "0123456";
-            uffe.Age = 39;
+            Student ali = new Student("Ali", "321654", 34);
+            Student sven = new Student("Sven", "7878654", 24);
+            Student ola = new Student("Ola", "987654", 21);
 
-            
+            ali.Subjects.Add("C++");
+            ali.Subjects.Add("C#");
+            ali.Subjects.Add("HTML");
 
-            Console.WriteLine(uffe);
+            uffe.Students.Add(ali);
+            uffe.Students.Add(sven);
+            uffe.Students.Add(ola);
+
+            List<Person> schoolPeopleList = new List<Person>();
+
+            schoolPeopleList.Add(uffe);
+            schoolPeopleList.Add(ali);
+            schoolPeopleList.Add(ola);
+            schoolPeopleList.Add(sven);
+
+            foreach (Person itemInList in schoolPeopleList)
+            {
+                if (itemInList is Student)//hide
+                {
+                    Console.WriteLine((itemInList as Student).ToString());
+                }
+                else
+                {
+                    Console.WriteLine(itemInList);//override
+                }
+            }
+
         }
 
-        public void ShapesAndCo()
+        public static void ShapesAndCo()
         {
             /*
              1. Shape       - width & height
